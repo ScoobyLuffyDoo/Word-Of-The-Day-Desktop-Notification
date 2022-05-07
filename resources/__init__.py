@@ -1,0 +1,1 @@
+from .generateWordDetails import WordOfTheDay
