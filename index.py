@@ -1,37 +1,25 @@
-import zroya
 import time
+
+from matplotlib.style import context
 import resources
-# Initialization is required. But in real usage, check the return code, please.
-zroya.init("Word Of The Day", "a", "b", "c","d")
-word_of_the_day = resources.WordOfTheDay.get_word_of_the_day_details()
-# Template for question
-ask_template = zroya.Template(zroya.TemplateType.ImageAndText4)
-ask_template.setFirstLine("Word Of The Day")
-ask_template.setSecondLine(word_of_the_day['word'] )
-# ask_template.setImage("./files/image.png")
-ask_template.addAction("Descriptions")
-ask_template.addAction("Usage")
 
-# Response for Fine
-fine_template = zroya.Template(zroya.TemplateType.Text1)
-fine_template.setFirstLine("Glad to hear that!")
-
-# Response for OK
-ok_template = zroya.Template(zroya.TemplateType.Text1)
-ok_template.setFirstLine("I'm sorry to hear that!")
+try:
+    import zroya
+    oldWin = False
+except:
+    import win10toast as wToast
+    oldWin = True
 
 
-# prepare handler
-def onAction(nid, action_id):
-    global fine_template, ok_template
+def useZroya(context):
+        resources.UseZroyaPopup(context)
 
-    if action_id == 0:
-        zroya.show(ok_template)
+def useToaster():
+    print("Using Toaster")
+
+if __name__ == "__main__":
+    context = resources.WordOfTheDay.get_word_of_the_day_details()
+    if oldWin == False:
+        useZroya(context)
     else:
-        zroya.show(fine_template)
-
-# Show question
-zroya.show(ask_template, on_action=onAction)
-
-# Keep application running, unless onAction handler is never executed.
-time.sleep(10)
+        useToaster(context)
