@@ -2,10 +2,11 @@ import zroya
 import time
 
 
+@log_action(test=)
 class UseZroyaPopup:
-    def __init__(self,context):
+    def __init__(self,context) -> dict:
         context = self.context 
-
+        new: bytes =''
     zroya.init("Word Of The Day", "a", "b", "c","d")
     
     # Template for question
