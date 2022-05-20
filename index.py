@@ -12,7 +12,7 @@ except:
 
 
 def useZroya(context):
-        resources.UseZroyaPopup(context)
+    resources.UseZroyaPopup(context).ZoraToast()
 
 def useToaster():
     print("Using Toaster")
